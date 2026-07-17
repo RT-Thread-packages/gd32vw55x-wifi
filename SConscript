@@ -160,12 +160,6 @@ if GetDepend(['PKG_USING_GD32VW55X_WIFI']):
             'LWIP_TIMEVAL_PRIVATE=0',  # 避免与系统 timeval 冲突
         ]
 
-        # 添加 lwip mem.c 编译（RT-Thread 的 lwip SConscript 没有包含它）
-        # GD32 的 lwipopts.h 定义了 MEM_LIBC_MALLOC=1，但仍需要 mem_init 等函数
-        lwip_mem_c = os.path.join(rtthread_root,'components', 'net', 'lwip', 'lwip-2.1.2', 'src', 'core', 'mem.c')
-        if os.path.exists(lwip_mem_c):
-            src += [lwip_mem_c]
-
     # 预编译库配置
     lib_path = cwd + '/lib'
     dsp_lib_path = cwd + '/src/plf/riscv/NMSIS/Library/DSP/GCC'
